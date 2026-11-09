@@ -1,0 +1,11 @@
+config.env
+whatsapp-mcp/
+estado.json
+estado.tmp
+sombra/
+*.log
+*.out
+.lock/
+.codex-saida.txt
+__pycache__/
+.whatsapp/
