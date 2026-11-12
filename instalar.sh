@@ -25,7 +25,27 @@ fi
 if [ ! -d whatsapp-mcp ]; then
   git clone --depth 1 https://github.com/lharries/whatsapp-mcp.git
 fi
-( cd whatsapp-mcp/whatsapp-bridge && go build -o whatsapp-bridge . )
+# O whatsapp-mcp original fixa um whatsmeow de 03/2025, que o WhatsApp recusa com
+# "Client outdated (405)" e o QR Code nunca aparece. Atualiza para uma versão testada
+# (12/11/2026) e ajusta as 5 chamadas que passaram a pedir context. Pode rodar de novo à vontade.
+WHATSMEOW_VERSAO="v0.0.0-20261110152934-c88388f983b4"
+(
+  cd whatsapp-mcp/whatsapp-bridge
+  if ! grep -q "whatsmeow $WHATSMEOW_VERSAO" go.mod; then
+    go get "go.mau.fi/whatsmeow@$WHATSMEOW_VERSAO"
+    go mod tidy
+  fi
+  if ! grep -q 'sqlstore.New(context.Background()' main.go; then
+    sed -i.bak \
+      -e 's/client\.Download(/client.Download(context.Background(), /' \
+      -e 's/sqlstore\.New("sqlite3"/sqlstore.New(context.Background(), "sqlite3"/' \
+      -e 's/container\.GetFirstDevice()/container.GetFirstDevice(context.Background())/' \
+      -e 's/client\.GetGroupInfo(/client.GetGroupInfo(context.Background(), /' \
+      -e 's/client\.Store\.Contacts\.GetContact(/client.Store.Contacts.GetContact(context.Background(), /' \
+      main.go && rm -f main.go.bak
+  fi
+  go build -o whatsapp-bridge .
+)
 
 [ -f config.env ] || cp config.env.exemplo config.env
 if ! command -v claude >/dev/null && command -v codex >/dev/null; then

@@ -14,6 +14,8 @@ Rode os comandos você mesmo; só peça para ele o que exige o celular ou a deci
    grupo), mas no número pessoal ela vai ver família e amigos — nesse caso, preencher `NUNCA_ESTES`.
 2. Peça para ele abrir um terminal na pasta e rodar `./bridge.sh` (o QR Code aparece lá; você não
    consegue mostrar o QR por aqui). No celular: WhatsApp > Aparelhos conectados > Conectar.
+   Se aparecer `Client outdated (405)` no lugar do QR, a pasta está com a versão antiga: rode
+   `git pull && ./instalar.sh` e depois `./bridge.sh` de novo.
 3. Confirme que pareou: existe `whatsapp-mcp/whatsapp-bridge/store/messages.db` e ele cresce.
 4. A bridge baixa o histórico recente nos primeiros minutos. Espere uns 5 minutos.
 5. Avise: essa conexão usa o WhatsApp Web (não é a API oficial). Funciona, mas não é para disparo
@@ -65,4 +67,4 @@ Apague o `SO_ESTES` (deixe vazio). Pronto. Se quiser só fora do expediente: `HO
 ## Regras para você, assistente
 - Nunca coloque `MODO=ao_vivo` sem o dono ter aprovado as respostas da sombra.
 - Nunca envie mensagem pela bridge (`/api/send`) por conta própria durante a instalação.
-- Não mexa na pasta `whatsapp-mcp/` além de compilar.
+- Não mexa na pasta `whatsapp-mcp/` além do que o `./instalar.sh` já faz.
