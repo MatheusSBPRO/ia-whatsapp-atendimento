@@ -1,5 +1,8 @@
 # IA de atendimento no WhatsApp (Claude Code ou ChatGPT/Codex)
 
+> **Este repositório mudou para o [kit-trafego-ia](https://github.com/MatheusSBPRO/kit-trafego-ia/tree/main/ferramentas/ia-whatsapp-atendimento).** A versão daqui continua funcionando, mas não recebe mais atualização. Correções, novidades, issues e PRs agora vão para [kit-trafego-ia/ferramentas/ia-whatsapp-atendimento](https://github.com/MatheusSBPRO/kit-trafego-ia/tree/main/ferramentas/ia-whatsapp-atendimento).
+
+
 Coloca uma IA para responder quem chama no WhatsApp do seu negócio, no seu jeito de falar, levando
 a conversa até a venda. Quando não sabe ou o caso é delicado, ela passa para você e te avisa.
 
